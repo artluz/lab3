@@ -1,19 +1,24 @@
 version: '3.8'
+
 services:
   gateway:
     build: ./gateway
-    ports:
-      - "5000:5000"
+    ports: ["5000:5000"]
     depends_on:
       - greeting-service
       - sum-service
+    networks: [app-network]
 
   greeting-service:
     build: ./greeting
-    expose:
-      - "5001"  # только для внутренней сети
+    expose: ["5001"]
+    networks: [app-network]
 
   sum-service:
     build: ./sum
-    expose:
-      - "5002"
+    expose: ["5002"]
+    networks: [app-network]
+
+networks:
+  app-network:
+    driver: bridge
