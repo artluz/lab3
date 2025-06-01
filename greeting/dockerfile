@@ -1,12 +1,6 @@
-from python:3.12.3
-
-workdir /app
-
-copy requirements.txt .
-
-run pip install --no-cache-dir -r requirements.txt
-
-copy app.py .
-
-cmd ["python", "app.py"]
-
+FROM python:3.9-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY app.py .
+CMD ["python", "app.py"]
