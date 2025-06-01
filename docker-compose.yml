@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  gateway:
+    build: ./gateway
+    ports:
+      - "5000:5000"
+    depends_on:
+      - greeting-service
+      - sum-service
+
+  greeting-service:
+    build: ./greeting
+    expose:
+      - "5001"  # только для внутренней сети
+
+  sum-service:
+    build: ./sum
+    expose:
+      - "5002"
