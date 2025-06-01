@@ -1,11 +1,10 @@
-from flask import Flask, request, Response
-
+from flask import Flask, request
 app = Flask(__name__)
 
 @app.route('/greeting', methods=['GET'])
 def greeting():
-    name = request.args.get('name', 'Друг')  # По умолчанию "Друг", если имя не указано
-    return Response(f"Привет, {name}!", status=200, mimetype='text/plain')
+    name = request.args.get('name', 'Guest')
+    return f"Привет, {name}!", 200
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5001)
+    app.run(host='0.0.0.0', port=5001)
